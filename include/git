@@ -1,0 +1,34 @@
+#!/bin/bash
+
+gitClone() {
+    local repo=$1
+    local path=$2
+    
+    mkdir -p "$path" && git clone "$repo" "$path"
+}
+
+gitFetch() {
+    local path="$1"
+    
+    pushd . > /dev/null
+    
+    cd "$path" && git clean -df && git checkout -- . && git fetch
+    
+    local status=$?
+    
+    popd > /dev/null
+    
+    return $status
+}
+
+gitFetchOrClone() {
+    local repo=$1
+    local path=$2
+    
+    if [ -d "$path" ]
+        then
+            gitFetch "$path" || gitClone "$repo" "$path"
+        else
+            gitClone "$repo" "$path"
+        fi
+}

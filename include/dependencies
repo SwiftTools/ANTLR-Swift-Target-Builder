@@ -1,0 +1,14 @@
+#!/bin/bash
+
+installHomeBrew() {
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+}
+
+installMaven() {
+    brew install maven
+}
+
+setupDependencies() {
+    which brew || installHomeBrew
+    which mvn || installMaven
+}

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+copyTargetJava() {
+    local swiftTargetJavaSrc="$gitTargetFolder/org/antlr/v4/codegen/target/SwiftTarget.java"
+    local swiftTargetJavaDst="$gitAntlrFolder/tool/src/org/antlr/v4/codegen/target"
+    cp "$swiftTargetJavaSrc" "$swiftTargetJavaDst"
+}
+
+copySwiftStg() {
+    local swiftStgSrc="$gitTargetFolder/org/antlr/v4/tool/templates/codegen/Swift/Swift.stg"
+    local swiftStgDst="$gitAntlrFolder/tool/resources/org/antlr/v4/tool/templates/codegen/Swift"
+    
+    cp "$swiftStgSrc" "$swiftStgDst"
+}
+
+patchPomXml() {
+    local pomXmlPath="$gitAntlrFolder/tool/pom.xml"
+    local patchPath="$scriptRoot/patch.diff"
+    
+    patch "$pomXmlPath" "$patchPath" > /dev/null
+    
+    [ -e "$pomXmlPath" ]
+}
+
+integrateTargetInAntlr() {
+    copyTargetJava && copySwiftStg && patchPomXml
+}

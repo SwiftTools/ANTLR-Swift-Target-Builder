@@ -1,0 +1,10 @@
+#!/bin/bash
+
+install() {
+    mkdir -p "$installFolder"
+    cp "$gitAntlrFolder"/tool/target/*.jar "$installFolder" && echo "Installed. open \"$installFolder\""
+}
+
+installIfNeeded() {
+    [ -z "$installFolder" ] || install
+}

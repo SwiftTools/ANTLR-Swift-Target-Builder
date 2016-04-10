@@ -1,0 +1,2 @@
+all:
+	./autobuild.sh

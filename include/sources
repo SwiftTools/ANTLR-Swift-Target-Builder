@@ -1,0 +1,17 @@
+#!/bin/bash
+
+getAntlr4() {
+    local antlrRepo="https://github.com/antlr/antlr4.git"
+    
+    gitFetchOrClone "$antlrRepo" "$gitAntlrFolder"
+}
+
+getTarget() {
+    local targetRepo="https://github.com/janyou/ANTLR-Swift-Target.git"
+    
+    gitFetchOrClone "$targetRepo" "$gitTargetFolder"
+}
+
+getSources() {
+    getAntlr4 && getTarget
+}

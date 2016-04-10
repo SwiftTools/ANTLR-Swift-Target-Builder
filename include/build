@@ -1,0 +1,20 @@
+#!/bin/bash
+
+buildIfNeeded() {
+    pushd . > /dev/null
+    cd "$gitAntlrFolder/tool/target/" || return 1
+    ls *.jar || build
+    popd > /dev/null
+}
+
+build() {
+    pushd . > /dev/null
+    
+    cd "$gitAntlrFolder" && mvn compile && mvn -DskipTests install
+    
+    local status=$?
+
+    popd
+    
+    return $status
+}
