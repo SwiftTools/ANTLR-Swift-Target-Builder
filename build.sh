@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Reference: https://github.com/janyou/ANTLR-Swift-Target/blob/master/ManuallyBuild.md
+
 # Setup
 
 pushd . > /dev/null
